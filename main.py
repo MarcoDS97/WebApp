@@ -3,7 +3,7 @@ import mysql.connector
 from flask import Flask, jsonify, render_template
 
 app = Flask(__name__)
-
+#prova
 # Configura la connessione al database MySQL
 db_config = {
     'host': 'localhost',
