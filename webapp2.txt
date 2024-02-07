@@ -1,0 +1,36 @@
+db campionato
+
+TAB squadra-risultati
+
+id
+nome
+vittorie
+sconfitte
+pareggi
+punteggio
+
+
+TAB giocatori
+
+id
+nome
+cognome
+età
+nazionalità
+ruolo
+numero_maglia
+id_squadra
+
+
+TAB partita
+
+id_partita
+id_squadra1
+id_squadra2
+id_giornata
+
+
+TAB giornata
+
+id_giornata
+data_partite
