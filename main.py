@@ -9,7 +9,7 @@ db_config = {
     'host': 'localhost',
     'user': 'root',
     'password': '',
-    'database': 'newdb'
+    'database': 'campionato'
 }
 
 # Funzione per creare una connessione al database
