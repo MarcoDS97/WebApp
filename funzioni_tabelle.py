@@ -32,3 +32,4 @@ def create_table():
     ADD CONSTRAINT fk_squadra FOREIGN KEY (id_squadra) REFERENCES squadra_risultati(id_squadra)
     """
     execute_query(fk_giocatori)
+

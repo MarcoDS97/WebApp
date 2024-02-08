@@ -1,4 +1,5 @@
 import mysql.connector
+from mysql.connector import Error
 
 db_config = {
     'host': 'localhost',
@@ -22,3 +23,13 @@ def execute_query(query, params=None):
     cursor.close()
     connection.close()
     return result
+
+def execute_many(query, data):
+    connection = create_db_connection()
+    cursor = connection.cursor()
+    try:
+        cursor.executemany(query, data)
+        connection.commit()
+        print("Query succesful")
+    except Error as err:
+        print(f"Error: '{err}'")
