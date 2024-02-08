@@ -7,7 +7,7 @@ nome
 vittorie
 sconfitte
 pareggi
-punteggio
+punti
 
 
 TAB giocatori
@@ -27,6 +27,8 @@ TAB partita
 id_partita
 id_squadra1
 id_squadra2
+goal_s1
+goal_s2
 id_giornata
 
 
