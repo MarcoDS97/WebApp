@@ -1,3 +1,5 @@
+from funzioni_connessioni import *
+
 def create_table():
     query_squadra_risultati = """
     CREATE TABLE IF NOT EXISTS squadra_risultati(
@@ -7,8 +9,9 @@ def create_table():
     sconfitte INT(11),
     pareggi INT(11),
     punteggio INT(11)
-    )
+    );
     """
+    execute_query(query_squadra_risultati)
 
     query_giocatori = """
     CREATE TABLE IF NOT EXISTS giocatori(
@@ -20,9 +23,12 @@ def create_table():
     ruolo VARCHAR(255),
     numero_maglia INT(11),
     id_squadra INT(11)
+    );
     """
+    execute_query(query_giocatori)
 
     fk_giocatori = """
     ALTER TABLE giocatori
     ADD CONSTRAINT fk_squadra FOREIGN KEY (id_squadra) REFERENCES squadra_risultati(id_squadra)
     """
+    execute_query(fk_giocatori)

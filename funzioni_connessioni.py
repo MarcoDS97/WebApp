@@ -1,3 +1,12 @@
+import mysql.connector
+
+db_config = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': '',
+    'database': 'campionato'
+}
+
 def create_db_connection():
     return mysql.connector.connect(**db_config)
 
