@@ -20,6 +20,9 @@
     background-color: blueviolet;
     text-align: center;
     }
+    td:nth-child(even) {
+    background-color: #D6EEEE;
+    }
 </style>
 <body>
 
@@ -49,13 +52,26 @@
   </div>
   </nav>
 
-{% for risultati in lista_risultati %}
-<div class="d-flex ris">
-    <div class="p-2">Giornata {{ risultati.giornata }}</div>
-    <div class="p-2 flex-fill">{{ risultati.squadra_s1 }}</div>
-    <div class="p-2 flex-fill">{{ risultati.gs1 }} - {{ risultati.gs2 }}</div>
-    <div class="p-2 flex-fill">{{ risultati.squadra_s2 }}</div>
-</div>
-{% endfor %}
+<table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Giornata</th>
+            <th scope="col">Casa</th>
+            <th scope="col">Risultati</th>
+            <th scope="col">Trasferta</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for risultati in lista_risultati %}
+        <tr>
+            <th scope="row">{{ risultati.giornata }}</th>
+            <td>{{ risultati.squadra_s1 }}</td>
+            <td>{{ risultati.gs1 }} - {{ risultati.gs2 }}</td>
+            <td>{{ risultati.squadra_s2 }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
