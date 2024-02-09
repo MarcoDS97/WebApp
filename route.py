@@ -66,6 +66,7 @@ def classifica(): #Davide
             for squadra in classifica:
                 if squadra["id"] == elem["id_s2"]:
                     squadra["p"] += 1
+
         elif elem["gs1"] < elem["gs2"]:
             for squadra in classifica:
                 if squadra["id"] == elem["id_s1"]:
@@ -76,6 +77,8 @@ def classifica(): #Davide
     # classifica è una lista di dizionari
     for elem in classifica:
         elem["punteggio"] += (elem["v"]*3 + elem["p"])
+
+    classifica = sorted(classifica, key=lambda x: x["punteggio"], reverse=True)
 
     return render_template("classifica.html", classifica=classifica)
 
