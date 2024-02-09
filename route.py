@@ -12,13 +12,31 @@ def homepage():
 @app.route("/calendario")
 def calendario():
     data = visualizza_calendario()
-    return render_template("calendario.html")
+
+
+    return render_template("calendario.html", lista_risultati = data)
 
 @app.route("/calendario/visualizza")
 def visualizza_calendario():
-    query = "SELECT * FROM shows WHERE type = 'TV Show'"
-    # items = execute_query(query)
-    # return items
+    query = "SELECT * FROM risultati"
+    items = execute_query(query)
+
+    query1 = "SELECT * FROM squadra"
+    items1 = execute_query(query1)
+
+    for risultato in items:
+        id_s1 = risultato['id_s1']
+        id_s2 = risultato['id_s2']
+
+        # Trova i nomi delle squadre utilizzando gli id_squadra
+        squadra_s1 = next((squadra['nome'] for squadra in items1 if squadra['id_squadra'] == id_s1), None)
+        squadra_s2 = next((squadra['nome'] for squadra in items1 if squadra['id_squadra'] == id_s2), None)
+
+        # Aggiorna il risultato con i nomi delle squadre
+        risultato['squadra_s1'] = squadra_s1
+        risultato['squadra_s2'] = squadra_s2
+
+    return items
 
 @app.route("/classifica")
 def classifica(): #Davide

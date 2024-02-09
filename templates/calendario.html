@@ -42,18 +42,20 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/">Home</a>
         <a class="nav-link" href="/calendario">Calendario</a>
-        <a class="nav-link" href="/">Risultati</a>
+        <a class="nav-link" href="/">Classifica</a>
         <a class="nav-link" href="/calciatori">Calciatori</a>
       </div>
     </div>
   </div>
   </nav>
 
+{% for risultati in lista_risultati %}
 <div class="d-flex ris">
-    <div class="p-2">Giornata 1</div>
-    <div class="p-2 flex-fill">Squadra 1</div>
-    <div class="p-2 flex-fill">3 - 0</div>
-    <div class="p-2 flex-fill">Squadra 2</div>
+    <div class="p-2">Giornata {{ risultati.giornata }}</div>
+    <div class="p-2 flex-fill">{{ risultati.squadra_s1 }}</div>
+    <div class="p-2 flex-fill">{{ risultati.gs1 }} - {{ risultati.gs2 }}</div>
+    <div class="p-2 flex-fill">{{ risultati.squadra_s2 }}</div>
 </div>
+{% endfor %}
 </body>
 </html>
