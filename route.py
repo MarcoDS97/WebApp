@@ -8,9 +8,13 @@ app = Flask(__name__)
 def homepage():
     return render_template("home.html")
 
-@app.route("/squadre")
-def squadre():
-    return render_template("squadre.html")
+@app.route("/calendario")
+def calendario():
+    return render_template("calendario.html")
+
+@app.route("/classifica")
+def classifica():
+    return render_template("classifica.html")
 
 @app.route("/calciatori")
 def calciatori():
