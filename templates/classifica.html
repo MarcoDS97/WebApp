@@ -123,6 +123,7 @@
     <table class="table">
         <thead>
         <tr>
+            <th scope="col">Posizione</th>
             <th scope="col">Squadra</th>
             <th scope="col">V</th>
             <th scope="col">S</th>
@@ -132,13 +133,16 @@
         </thead>
         <tbody>
         {%for elem in classifica%}
+
         <tr>
-            <th scope="row">{{elem.nome}}</th>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{elem.nome}}</td>
             <td>{{elem.v}}</td>
             <td>{{elem.s}}</td>
             <td>{{elem.p}}</td>
             <td>{{elem.punteggio}}</td>
         </tr>
+
         {%endfor%}
         </tbody>
     </table>
