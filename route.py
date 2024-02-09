@@ -11,7 +11,14 @@ def homepage():
 
 @app.route("/calendario")
 def calendario():
+    data = visualizza_calendario()
     return render_template("calendario.html")
+
+@app.route("/calendario/visualizza")
+def visualizza_calendario():
+    query = "SELECT * FROM shows WHERE type = 'TV Show'"
+    # items = execute_query(query)
+    # return items
 
 @app.route("/classifica")
 def classifica(): #Davide
