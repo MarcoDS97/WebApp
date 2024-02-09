@@ -19,7 +19,7 @@ def classifica(): #Davide
     squadre = execute_query(query_squadre)
     classifica = []  #conterrà ogni squadra con vittorie, sconfitte e pareggi e verrà ritornato alla fine
     for elem in squadre:
-        squadra = {"id": elem["id_squadra"],"nome": elem["nome"],"v":0, "s":0, "p":0}
+        squadra = {"id": elem["id_squadra"],"nome": elem["nome"],"v":0, "s":0, "p":0, "punteggio":0}
         classifica.append(squadra)
 
     query_risultati = "SELECT * FROM risultati"
@@ -49,6 +49,9 @@ def classifica(): #Davide
                 if squadra["id"] == elem["id_s2"]:
                     squadra["v"] += 1
     # classifica è una lista di dizionari
+    for elem in classifica:
+        elem["punteggio"] += (elem["v"]*3 + elem["p"])
+
     return render_template("classifica.html", classifica=classifica)
 
 @app.route("/calciatori")
