@@ -4,11 +4,14 @@ TAB squadra-risultati
 
 id
 nome
+
+TAB risultati
+id
 vittorie
 sconfitte
 pareggi
 punti
-
+id_squadra
 
 TAB giocatori
 
