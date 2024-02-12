@@ -7,7 +7,25 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
-    return render_template("home.html")
+    query_squadre = "SELECT nome FROM squadra"
+    diz_squad = execute_query(query_squadre)
+    lista_squad = []
+    for elem in diz_squad:
+        lista_squad.append(elem["nome"])
+    query_giocatori = """SELECT giocatori.nome, cognome, squadra.nome AS squad
+                         FROM giocatori INNER JOIN squadra
+                         ON giocatori.id_squadra = squadra.id_squadra;"""
+    diz_giocatori = execute_query(query_giocatori)
+    lista_squadra_giocatori = []
+    for elem in lista_squad:
+        lista_squadra_giocatori.append({"squadra":elem, "giocatori":[]})
+
+    for elem in lista_squadra_giocatori:     #lista_squadra_giocatori è una lista di dizionari formati da nome squadra e lista giocatori
+        for gioc in diz_giocatori:
+            if gioc["squad"] == elem["squadra"]:
+                elem["giocatori"].append(f"{gioc["nome"]} {gioc["cognome"]}")
+
+    return render_template("home.html", lista_squadre=lista_squadra_giocatori)
 
 @app.route("/calendario")
 def calendario():
