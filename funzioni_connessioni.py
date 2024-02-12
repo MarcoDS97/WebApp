@@ -33,3 +33,17 @@ def execute_many(query, data):
         print("Query succesful")
     except Error as err:
         print(f"Error: '{err}'")
+
+def execute_query_insert(query, params=None):
+    connection = create_db_connection()
+    cursor = connection.cursor()
+
+    if params:
+        cursor.execute(query, params)
+    else:
+        cursor.execute(query)
+
+    connection.commit()
+
+    cursor.close()
+    connection.close()
