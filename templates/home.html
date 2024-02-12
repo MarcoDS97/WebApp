@@ -144,12 +144,14 @@
 
 <button class="btn btn-secondary btn-rotate">Crea DB</button>
 
+<div class="d-flex flex-column align-content-center">
+{%for elem in lista_squadre%}
 <section class="sezioneCard">
     <div class="contenitoreArticoli">
 
         <div class="demo-content py-3">
             <div class="rotate-container mx-auto">
-                <div class="card card-front border-info">Inter
+                <div class="card card-front border-info">{{elem["nome"]}}
                     <div class="card-body">
                         <p class="card-text"></p>
                         <button class="btn btn-secondary btn-rotate">Dettagli</button>
@@ -157,7 +159,9 @@
                 </div>
                 <div class="card card-back">
                     <div class="card-body">
-                        <p class="card-text1"> Stato Provenienza: Italia <br> Città Provenienza: Milano </p>
+                        <p class="card-text1"> Gol fatti: {{elem["Gol fatti"]}} <br>
+                            Gol subiti: {{elem["Gol subiti"]}} <br>
+                            Differenza reti: {{elem["Differenza reti"]}}</p>
                         <button class="btn btn-dark btn-rotate">Go back</button>
                     </div>
                 </div>
