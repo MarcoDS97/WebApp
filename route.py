@@ -51,9 +51,32 @@ def classifica(): #Davide
     # classifica è una lista di dizionari
     return render_template("classifica.html", classifica=classifica)
 
+
 @app.route("/calciatori")
 def calciatori():
-    return render_template("calciatori.html")
+
+    query = """
+        SELECT COUNT(DISTINCT id_squadra)
+        FROM giocatori
+    """ 
+    
+    numero_squadre = execute_query(query)
+    #estrazione valore dal dizionario
+    numero_squadre = list(numero_squadre[0].values())[0]
+
+    query = """
+        SELECT *
+        FROM giocatori
+        WHERE id_squadra = %s;
+    """
+    
+    diz_squadra = {}
+
+    for i in range(1,numero_squadre+1):
+        diz_squadra[i] = execute_query(query, (i,))
+
+    return render_template("calciatori.html", diz_squadra=diz_squadra, numero_squadre=numero_squadre)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
