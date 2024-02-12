@@ -155,6 +155,8 @@ def calciatori():
         FROM squadra
     """ 
 
+    #commento
+
     id_nome_squadra = execute_query(query)
 
     return render_template("calciatori.html", diz_squadra=diz_squadra, numero_squadre=numero_squadre, id_nome_squadra=id_nome_squadra)
