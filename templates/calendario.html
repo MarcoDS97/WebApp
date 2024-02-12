@@ -7,6 +7,19 @@
     <title>Calendario</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
+<style>
+    .hd{
+    background-image: url("static/Img/Sfondo.jpg");
+    }
+    .hd1{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    }
+    .table-striped tbody tr:nth-child(odd) {
+    background-color: darkseagreen !important;
+    }
+</style>
 <body>
 
 <div class="header hd">
@@ -28,17 +41,33 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/">Home</a>
         <a class="nav-link" href="/calendario">Calendario</a>
-        <a class="nav-link" href="/">Risultati</a>
+        <a class="nav-link" href="/">Classifica</a>
         <a class="nav-link" href="/calciatori">Calciatori</a>
       </div>
     </div>
   </div>
   </nav>
 
-<div class="d-flex">
-  <div class="p-2 flex-fill">Squadra 1</div>
-  <div class="p-2 flex-fill">3 - 0</div>
-  <div class="p-2 flex-fill">Squadra 2</div>
-</div>
+<table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Giornata</th>
+            <th scope="col">Casa</th>
+            <th scope="col">Risultati</th>
+            <th scope="col">Trasferta</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for risultati in lista_risultati %}
+        <tr>
+            <th scope="row">{{ risultati.giornata }}</th>
+            <td>{{ risultati.squadra_s1 }}</td>
+            <td>{{ risultati.gs1 }} - {{ risultati.gs2 }}</td>
+            <td>{{ risultati.squadra_s2 }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
