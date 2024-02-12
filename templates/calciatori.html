@@ -2,10 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">   
     <title>Title</title>
+
+    <style>
+        .hd{
+            background-image: url("static/Img/Sfondo.jpg");
+        }
+        .hd1{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
+
 </head>
 <body>
+
+<div class="header hd">
+    <div class="container hd1">
+        <img src="static/Img/League2.png" alt="Logo">
+        <div>
+            <h3 style="color: white">CAMPIONATO</h3>
+            <h4 style="color: white">EURO DAITA12</h4>
+        </div>
+    </div>
+</div>
+
+<nav class="d-flex justify-content-center navbar navbar-expand-sm bg-dark border-bottom border-body" data-bs-theme="dark">
+  <div class="container-lg">
+    <img src="static/Img/League2.png" alt="Logo" width="40" height="30">
+    <a class="navbar-brand" href="#">EURO DAITA12</a>
+
+    <div class="collapse navbar-collapse">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
+        <a class="nav-link" href="/calendario">Calendario</a>
+        <a class="nav-link" href="/classifica">Classifica</a>
+        <a class="nav-link" href="/calciatori">Calciatori</a>
+      </div>
+    </div>
+  </div>
+  </nav>
+
     <div class="d-flex flex-column justify-content-center p-3">
 
     {% for i in range(diz_squadra|length): %}
