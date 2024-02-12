@@ -7,25 +7,51 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
+    # """SELECT SUM(gs1) AS "Gol subiti", SUM(gs2) AS "Gol fatti"
+    # FROM risultati INNER JOIN squadra
+    # ON risultati.id_s2 = squadra.id_squadra
+    # WHERE id_s2 = %s"""        fuori-casa
+
+    # """SELECT SUM(gs1) AS "Gol fatti", SUM(gs2) AS "Gol subiti"
+    # FROM risultati INNER JOIN squadra
+    # ON risultati.id_s1 = squadra.id_squadra
+    # WHERE id_s1 = %s"""        in-casa
+
     query_squadre = "SELECT nome FROM squadra"
     diz_squad = execute_query(query_squadre)
     lista_squad = []
     for elem in diz_squad:
         lista_squad.append(elem["nome"])
-    query_giocatori = """SELECT giocatori.nome, cognome, squadra.nome AS squad
-                         FROM giocatori INNER JOIN squadra
-                         ON giocatori.id_squadra = squadra.id_squadra;"""
-    diz_giocatori = execute_query(query_giocatori)
-    lista_squadra_giocatori = []
-    for elem in lista_squad:
-        lista_squadra_giocatori.append({"squadra":elem, "giocatori":[]})
 
-    for elem in lista_squadra_giocatori:     #lista_squadra_giocatori è una lista di dizionari formati da nome squadra e lista giocatori
-        for gioc in diz_giocatori:
-            if gioc["squad"] == elem["squadra"]:
-                elem["giocatori"].append(f"{gioc["nome"]} {gioc["cognome"]}")
+    gol_1 = []
+    gol_2 = []
+    for squadra in lista_squad:
+        query1 = f"""SELECT SUM(gs1) AS "Gol subiti", SUM(gs2) AS "Gol fatti", squadra.nome
+        FROM risultati INNER JOIN squadra
+        ON risultati.id_s2 = squadra.id_squadra
+        WHERE squadra.nome = '{squadra}'"""
+        risultato = execute_query(query1, squadra)
+        if risultato[0]["nome"] == None:
+            risultato = [{"Gol subiti":0, "Gol fatti":0, "nome":squadra}]
+        gol_1.append(risultato[0])
+        query2 = f"""SELECT SUM(gs1) AS "Gol fatti", SUM(gs2) AS "Gol subiti", squadra.nome
+        FROM risultati INNER JOIN squadra
+        ON risultati.id_s1 = squadra.id_squadra
+        WHERE squadra.nome = '{squadra}'"""
+        risultato = execute_query(query2, squadra)
+        if risultato[0]["nome"] == None:
+            risultato = [{"Gol subiti":0, "Gol fatti":0, "nome":squadra}]
+        gol_2.append(risultato[0])
 
-    return render_template("home.html", lista_squadre=lista_squadra_giocatori)
+    for elem in gol_1:
+        for elem2 in gol_2:
+            if elem["nome"] == elem2["nome"]:
+                elem["Gol fatti"] += elem2["Gol fatti"]
+                elem["Gol subiti"] += elem2["Gol subiti"]
+                elem["Differenza reti"] = elem["Gol fatti"] - elem["Gol subiti"]
+
+    print(gol_1)
+    return render_template("home.html", lista_squadre=gol_1)
 
 @app.route("/calendario")
 def calendario():
