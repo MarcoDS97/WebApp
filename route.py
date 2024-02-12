@@ -29,16 +29,16 @@ def homepage():
         query1 = f"""SELECT SUM(gs1) AS "Gol subiti", SUM(gs2) AS "Gol fatti", squadra.nome
         FROM risultati INNER JOIN squadra
         ON risultati.id_s2 = squadra.id_squadra
-        WHERE squadra.nome = '{squadra}'"""
-        risultato = execute_query(query1, squadra)
+        WHERE squadra.nome = %s"""
+        risultato = execute_query(query1, (squadra,))
         if risultato[0]["nome"] == None:
             risultato = [{"Gol subiti":0, "Gol fatti":0, "nome":squadra}]
         gol_1.append(risultato[0])
         query2 = f"""SELECT SUM(gs1) AS "Gol fatti", SUM(gs2) AS "Gol subiti", squadra.nome
         FROM risultati INNER JOIN squadra
         ON risultati.id_s1 = squadra.id_squadra
-        WHERE squadra.nome = '{squadra}'"""
-        risultato = execute_query(query2, squadra)
+        WHERE squadra.nome = %s"""
+        risultato = execute_query(query2, (squadra,))
         if risultato[0]["nome"] == None:
             risultato = [{"Gol subiti":0, "Gol fatti":0, "nome":squadra}]
         gol_2.append(risultato[0])
