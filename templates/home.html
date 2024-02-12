@@ -16,7 +16,7 @@
     </script>
     <style>
         .hd{
-            background-image: url(Img/Sfondo.jpg);
+            background-image: url("static/Img/Sfondo.jpg");
         }
         .hd1{
             display: flex;
@@ -75,7 +75,7 @@
             width: 300px;
             }
             .card-text{
-            background-image: url(./Img/League2.png);
+            background-image: url("./static/Img/League2.png");
             background-position: center;
             background-size: cover;
             width: 250px;
@@ -93,7 +93,7 @@
 
 <div class="header hd">
     <div class="container hd1">
-        <img src="Img/League2.png" alt="Logo">
+        <img src="static/Img/League2.png" alt="Logo">
         <div>
             <h3 style="color: white">CAMPIONATO</h3>
             <h4 style="color: white">EURO DAITA12</h4>
@@ -103,20 +103,21 @@
 
 <nav class="navbar navbar-expand-sm bg-dark border-bottom border-body" data-bs-theme="dark">
   <div class="container-lg">
-    <img src="Img/League2.png" alt="Logo" width="40" height="30">
+    <img src="static/Img/League2.png" alt="Logo" width="40" height="30">
     <a class="navbar-brand" href="#">EURO DAITA12</a>
 
     <div class="collapse navbar-collapse">
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/">Home</a>
-        <a class="nav-link" href="/">Calendario</a>
+        <a class="nav-link" href="/calendario">Calendario</a>
         <a class="nav-link" href="/">Risultati</a>
-        <a class="nav-link" href="/squadre">Squadre</a>
         <a class="nav-link" href="/calciatori">Calciatori</a>
       </div>
     </div>
   </div>
   </nav>
+
+<button class="btn btn-secondary btn-rotate">Crea DB</button>
 
 <section class="sezioneCard">
     <div class="contenitoreArticoli">
@@ -139,5 +140,6 @@
         </div>
     </div>
 </section>
+
 </body>
 </html>
