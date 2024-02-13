@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserimento Nomi Squadre</title>
+</head>
+<body>
+    <h2>Inserisci i nomi delle squadre:</h2>
+    <form method="POST" action="/inserisci_nomi_squadre/{{ numero_squadre }}">
+        {% for i in range(numero_squadre) %}
+            <label for="squadra_{{ i }}">Squadra {{ i+1 }}:</label>
+            <input type="text" name="squadra_{{ i }}" required><br>
+        {% endfor %}
+        <button type="submit">Invia</button>
+    </form>
+</body>
+</html>

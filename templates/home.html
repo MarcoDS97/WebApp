@@ -96,19 +96,63 @@
         display: flex;
         justify-content: space-evenly
         }
+
+        footer{
+        background-color: #000000e0;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        animation: slideRightToLeft 25s linear infinite;
+        }
+
+        @keyframes slideRightToLeft {
+            0% {
+            transform: translateX(100%);
+            }
+            100% {
+            transform: translateX(-100%);
+            }
+        }
+
+        .footerLinks{
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+        }
+
+        .contenitoreCopyright{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        }
+
+        html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        }
+
+        body {
+        display: flex;
+        flex-direction: column;
+        }
+
+        .content {
+        flex: 1;
+        }
     </style>
 </head>
 <body onload="rotateFu()">
-
-<div class="header hd">
-    <div class="container hd1">
-        <img src="static/Img/League2.png" alt="Logo">
-        <div>
-            <h3 style="color: white">CAMPIONATO</h3>
-            <h4 style="color: white">EURO DAITA12</h4>
+<div class="content">
+    <div class="header hd">
+        <div class="container hd1">
+            <img src="static/Img/League2.png" alt="Logo">
+            <div>
+                <h3 style="color: white">CAMPIONATO</h3>
+                <h4 style="color: white">EURO DAITA12</h4>
+            </div>
         </div>
     </div>
-</div>
 
 <nav class="navbar navbar-expand-sm bg-dark border-bottom border-body" data-bs-theme="dark">
   <div class="container-lg">
@@ -127,33 +171,53 @@
   </nav>
 
 <!--<button class="btn btn-secondary btn-rotate">Crea DB</button>-->
+<a href="/form_ins_sqd" class="btn btn-secondary">Aggiungi squadre</a>
 
-<div class="contCard">
-{%for elem in lista_squadre%}
-    <section class="sezioneCard">
-        <div class="contenitoreArticoli">
-
-            <div class="demo-content py-3">
-                <div class="rotate-container mx-auto">
-                    <div class="card card-front border-info">{{elem["nome"]}}
-                        <div class="card-body">
-                            <p class="card-text"></p>
-                            <button class="btn btn-secondary btn-rotate">Dettagli</button>
+    <div class="contCard">
+    {%for elem in lista_squadre%}
+        <section class="sezioneCard">
+            <div class="contenitoreArticoli">
+                <div class="demo-content py-3">
+                    <div class="rotate-container mx-auto">
+                        <div class="card card-front border-info">{{elem["nome"]}}
+                            <div class="card-body">
+                                {%for immagine in immagini%}
+                                    {%if elem["nome"] in immagine%}
+                                        <p class="card-text" style="background-image: url('{{immagine}}')"></p>
+                                    {%endif%}
+                                {%endfor%}
+                                <button class="btn btn-secondary btn-rotate">Dettagli</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card card-back">
-                        <div class="card-body">
-                            <p class="card-text1"> Gol fatti: {{elem["Gol fatti"]}} <br>
-                                Gol subiti: {{elem["Gol subiti"]}} <br>
-                                Differenza reti: {{elem["Differenza reti"]}}</p>
-                            <button class="btn btn-dark btn-rotate">Go back</button>
+                        <div class="card card-back">
+                            <div class="card-body">
+                                <p class="card-text1"> Gol fatti: {{elem["Gol fatti"]}} <br>
+                                    Gol subiti: {{elem["Gol subiti"]}} <br>
+                                    Differenza reti: {{elem["Differenza reti"]}}</p>
+                                <button class="btn btn-dark btn-rotate">Go back</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-{%endfor%}
+        </section>
+    {%endfor%}
+    </div>
 </div>
+<!--&lt;!&ndash;<div class="marquee" style="&#45;&#45;play: running; &#45;&#45;direction: normal; &#45;&#45;duration: 49.599375s; &#45;&#45;delay: 0s; &#45;&#45;iteration-count: infinite; &#45;&#45;min-width: auto;">-->
+<div style="background-color: Black; border-top: 2px solid blue;">
+<footer>
+    <ul class="footerLinks">
+        <a href="https://github.com/MarcoDS97/WebApp" style="color: white;">GitHub</a>
+        <li>Marco De Sio</li>
+        <li>Davide Lucarelli</li>
+        <li>Alessandro Comi</li>
+        <li>Riccardo Benedetti</li>
+    </ul>
+    <div class="contenitoreCopyright">
+        <p>@copyright 2024</p>
+    </div>
+</footer>
+    </div>
 </body>
 </html>

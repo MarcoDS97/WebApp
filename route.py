@@ -1,9 +1,11 @@
+
 import json
 import mysql.connector
 from funzioni_connessioni import *
 from flask import Flask, jsonify, render_template, request, redirect, url_for
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def homepage():
@@ -50,8 +52,13 @@ def homepage():
                 elem["Gol subiti"] += elem2["Gol subiti"]
                 elem["Differenza reti"] = elem["Gol fatti"] - elem["Gol subiti"]
 
-    print(gol_1)
-    return render_template("home.html", lista_squadre=gol_1)
+    immagini = ["./static/Img/Atalanta.png", "./static/Img/Bologna.png", "./static/Img/Cagliari.png", "./static/Img/Empoli.png",
+                "./static/Img/Fiorentina.png", "./static/Img/Fiorentina.png", "./static/Img/Frosinone.png", "./static/Img/Genoa.png",
+                "./static/Img/Inter.png", "./static/Img/Juventus.png", "./static/Img/Lazio.png", "./static/Img/Lecce.png",
+                "./static/Img/Milan.png", "./static/Img/Monza.png", "./static/Img/Napoli.png", "./static/Img/Roma.png",
+                "./static/Img/Salernitana.png", "./static/Img/Sassuolo.png", "./static/Img/Torino.png", "./static/Img/Udinese.png",
+                "./static/Img/Verona.png"]
+    return render_template("home.html", lista_squadre=gol_1, immagini=immagini)
 
 @app.route("/calendario")
 def calendario():
@@ -162,6 +169,60 @@ def calciatori():
     return render_template("calciatori.html", diz_squadra=diz_squadra, numero_squadre=numero_squadre, id_nome_squadra=id_nome_squadra)
 
 
+@app.route("/form_ins_sqd", methods=["GET", "POST"])
+def form_ins_sqd():
+    if request.method == "POST":
+        numero_squadre = int(request.form["numero_squadre"])
+        return redirect(url_for("inserisci_nomi_squadre", numero_squadre=numero_squadre))
+    return render_template("form_inserimento_numero_squadre.html")
+
+@app.route("/inserisci_nomi_squadre/<int:numero_squadre>", methods=["GET", "POST"])
+def inserisci_nomi_squadre(numero_squadre):
+    if request.method == "POST":
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+
+        for i in range(numero_squadre):
+            nome_squadra = request.form[f"squadra_{i}"]
+            cursor.execute("INSERT INTO squadra (nome) VALUES (%s)", (nome_squadra,))
+        
+        conn.commit()
+        conn.close()
+
+        return "Dati inseriti correttamente! <a href='/'>Torna alla Home</a>"
+        
+
+    return render_template("form_inserimento_nomi_squadre.html", numero_squadre=numero_squadre)
+
+
+
+@app.route("/form_ins_sqd", methods=["GET", "POST"])
+def form_ins_sqd():
+    if request.method == "POST":
+        numero_squadre = int(request.form["numero_squadre"])
+        return redirect(url_for("inserisci_nomi_squadre", numero_squadre=numero_squadre))
+    return render_template("form_inserimento_numero_squadre.html")
+
+@app.route("/inserisci_nomi_squadre/<int:numero_squadre>", methods=["GET", "POST"])
+def inserisci_nomi_squadre(numero_squadre):
+    if request.method == "POST":
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+
+        for i in range(numero_squadre):
+            nome_squadra = request.form[f"squadra_{i}"]
+            cursor.execute("INSERT INTO squadra (nome) VALUES (%s)", (nome_squadra,))
+        
+        conn.commit()
+        conn.close()
+
+        return "Dati inseriti correttamente! <a href='/'>Torna alla Home</a>"
+        
+
+    return render_template("form_inserimento_nomi_squadre.html", numero_squadre=numero_squadre)
+
+
+
 @app.route("/calciatori/inserisci_giocatore", methods=['POST'])
 def inserisci_giocatore():
     giocatore = [
@@ -182,6 +243,7 @@ def inserisci_giocatore():
     execute_query_insert(query_inserimento, giocatore)
     
     return redirect(url_for("calciatori", _anchor=request.form.get('j')))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

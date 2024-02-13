@@ -40,13 +40,6 @@ CREATE TABLE `risultati` (
 -- Dump dei dati per la tabella `risultati`
 --
 
-INSERT INTO `risultati` (`id_risultato`, `gs1`, `gs2`, `giornata`, `id_s1`, `id_s2`) VALUES
-(1, 3, 2, 1, 2, 3),
-(2, 2, 2, 1, 1, 4),
-(3, 0, 1, 2, 2, 1),
-(4, 2, 2, 2, 3, 4),
-(5, 3, 1, 3, 2, 4),
-(6, 2, 2, 3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -55,7 +48,7 @@ INSERT INTO `risultati` (`id_risultato`, `gs1`, `gs2`, `giornata`, `id_s1`, `id_
 --
 
 CREATE TABLE `squadra` (
-  `id_squadra` int(11) NOT NULL,
+  `id_squadra` int(11) PRIMARY KEY AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -63,11 +56,6 @@ CREATE TABLE `squadra` (
 -- Dump dei dati per la tabella `squadra`
 --
 
-INSERT INTO `squadra` (`id_squadra`, `nome`) VALUES
-(1, 'Milan'),
-(2, 'Inter'),
-(3, 'Juventus'),
-(4, 'Roma');
 
 --
 -- Indici per le tabelle scaricate
@@ -84,8 +72,6 @@ ALTER TABLE `risultati`
 --
 -- Indici per le tabelle `squadra`
 --
-ALTER TABLE `squadra`
-  ADD PRIMARY KEY (`id_squadra`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -100,9 +86,6 @@ ALTER TABLE `risultati`
 --
 -- AUTO_INCREMENT per la tabella `squadra`
 --
-ALTER TABLE `squadra`
-  MODIFY `id_squadra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- Limiti per le tabelle scaricate
 --
@@ -110,10 +93,7 @@ ALTER TABLE `squadra`
 --
 -- Limiti per la tabella `risultati`
 --
-ALTER TABLE `risultati`
-  ADD CONSTRAINT `fk_s1` FOREIGN KEY (`id_s1`) REFERENCES `squadra` (`id_squadra`),
-  ADD CONSTRAINT `fk_s2` FOREIGN KEY (`id_s2`) REFERENCES `squadra` (`id_squadra`);
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
