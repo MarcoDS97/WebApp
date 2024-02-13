@@ -100,9 +100,18 @@
         footer{
         background-color: #000000e0;
         color: white;
-        border-top: 2px solid blue;
         text-align: center;
         padding: 10px;
+        animation: slideRightToLeft 15s linear infinite;
+        }
+
+        @keyframes slideRightToLeft {
+            0% {
+            transform: translateX(100%);
+            }
+            100% {
+            transform: translateX(-100%);
+            }
         }
 
         .footerLinks{
@@ -195,6 +204,8 @@
     {%endfor%}
     </div>
 </div>
+<!--&lt;!&ndash;<div class="marquee" style="&#45;&#45;play: running; &#45;&#45;direction: normal; &#45;&#45;duration: 49.599375s; &#45;&#45;delay: 0s; &#45;&#45;iteration-count: infinite; &#45;&#45;min-width: auto;">-->
+<div style="background-color: Black; border-top: 2px solid blue;">
 <footer>
     <ul class="footerLinks">
         <a href="https://github.com/MarcoDS97/WebApp" style="color: white;">GitHub</a>
@@ -207,5 +218,6 @@
         <p>@copyright 2024</p>
     </div>
 </footer>
+    </div>
 </body>
 </html>
