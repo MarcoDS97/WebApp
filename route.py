@@ -55,7 +55,6 @@ def homepage():
                 elem["Gol subiti"] += elem2["Gol subiti"]
                 elem["Differenza reti"] = elem["Gol fatti"] - elem["Gol subiti"]
 
-    print(gol_1)
     return render_template("home.html", lista_squadre=gol_1)
 
 @app.route("/calendario")
