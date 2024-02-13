@@ -196,33 +196,6 @@ def inserisci_nomi_squadre(numero_squadre):
 
 
 
-@app.route("/form_ins_sqd", methods=["GET", "POST"])
-def form_ins_sqd():
-    if request.method == "POST":
-        numero_squadre = int(request.form["numero_squadre"])
-        return redirect(url_for("inserisci_nomi_squadre", numero_squadre=numero_squadre))
-    return render_template("form_inserimento_numero_squadre.html")
-
-@app.route("/inserisci_nomi_squadre/<int:numero_squadre>", methods=["GET", "POST"])
-def inserisci_nomi_squadre(numero_squadre):
-    if request.method == "POST":
-        conn = mysql.connector.connect(**db_config)
-        cursor = conn.cursor()
-
-        for i in range(numero_squadre):
-            nome_squadra = request.form[f"squadra_{i}"]
-            cursor.execute("INSERT INTO squadra (nome) VALUES (%s)", (nome_squadra,))
-        
-        conn.commit()
-        conn.close()
-
-        return "Dati inseriti correttamente! <a href='/'>Torna alla Home</a>"
-        
-
-    return render_template("form_inserimento_nomi_squadre.html", numero_squadre=numero_squadre)
-
-
-
 @app.route("/calciatori/inserisci_giocatore", methods=['POST'])
 def inserisci_giocatore():
     giocatore = [
