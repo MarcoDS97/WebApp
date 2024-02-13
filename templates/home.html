@@ -16,77 +16,86 @@
     </script>
     <style>
         .hd{
-            background-image: url("static/Img/Sfondo.jpg");
+        background-image: url("static/Img/Sfondo.jpg");
         }
+
         .hd1{
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
         }
+
         .rotate-container {
-            position: relative;
-          }
+        position: relative;
+        }
 
-            .rotate-container .card-front,
-            .rotate-container .card-back {
-            width: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            transition: all 0.5s linear 0s;
-            }
+        .rotate-container .card-front,
+        .rotate-container .card-back {
+        width: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transition: all 0.5s linear 0s;
+        }
 
-            .rotate-container .card-front {
-            -webkit-transform: perspective(600px) rotateY(0deg);
-            transform: perspective(600px) rotateY(0deg);
-            }
+        .rotate-container .card-front {
+        -webkit-transform: perspective(600px) rotateY(0deg);
+        transform: perspective(600px) rotateY(0deg);
+        }
 
-            .rotate-container .card-back {
-            -webkit-transform: perspective(1600px) rotateY(180deg);
-            transform: perspective(1600px) rotateY(180deg);
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            }
+        .rotate-container .card-back {
+        -webkit-transform: perspective(1600px) rotateY(180deg);
+        transform: perspective(1600px) rotateY(180deg);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        }
 
-            .rotate-container .card-front.rotate {
-            -webkit-transform: perspective(1600px) rotateY(-180deg);
-            transform: perspective(1600px) rotateY(-180deg);
-            }
+        .rotate-container .card-front.rotate {
+        -webkit-transform: perspective(1600px) rotateY(-180deg);
+        transform: perspective(1600px) rotateY(-180deg);
+        }
 
-            .rotate-container .card-back.rotate {
-            -webkit-transform: perspective(1600px) rotateY(0deg);
-            transform: perspective(1600px) rotateY(0deg);
-            }
+        .rotate-container .card-back.rotate {
+        -webkit-transform: perspective(1600px) rotateY(0deg);
+        transform: perspective(1600px) rotateY(0deg);
+        }
 
-            .rotate-container .card-front .btn-rotate,
-            .rotate-container .card-back .btn-rotate {
-            position: static;
-            z-index: 0;
-            }
+        .rotate-container .card-front .btn-rotate,
+        .rotate-container .card-back .btn-rotate {
+        position: static;
+        z-index: 0;
+        }
 
-            /* Demo style only */
-            .demo-content {
-            margin-bottom: 70px;
-            text-align: center;
-            }
+        /* Demo style only */
+        .demo-content {
+        margin-bottom: 70px;
+        text-align: center;
+        }
 
-            .rotate-container {
-            width: 300px;
-            }
-            .card-text{
-            background-image: url("./static/Img/League2.png");
-            background-position: center;
-            background-size: cover;
-            width: 250px;
-            height: 250px;
-            }
-            .card-text1{
-                background-position: center;
-                background-size: cover;
-                width: 250px;
-                height: 250px;
-                }
+        .rotate-container {
+        width: 300px;
+        }
+
+        .card-text{
+        background-image: url("./static/Img/League2.png");
+        background-position: center;
+        background-size: cover;
+        width: 250px;
+        height: 250px;
+        }
+
+        .card-text1{
+        background-position: center;
+        background-size: cover;
+        width: 250px;
+        height: 250px;
+        }
+
+        .contCard{
+        display: flex;
+        justify-content: space-evenly
+        }
     </style>
 </head>
 <body onload="rotateFu()">
@@ -119,31 +128,31 @@
 
 <!--<button class="btn btn-secondary btn-rotate">Crea DB</button>-->
 
-<div class="d-flex flex-column align-content-center">
+<div class="contCard">
 {%for elem in lista_squadre%}
-<section class="sezioneCard">
-    <div class="contenitoreArticoli">
+    <section class="sezioneCard">
+        <div class="contenitoreArticoli">
 
-        <div class="demo-content py-3">
-            <div class="rotate-container mx-auto">
-                <div class="card card-front border-info">{{elem["nome"]}}
-                    <div class="card-body">
-                        <p class="card-text"></p>
-                        <button class="btn btn-secondary btn-rotate">Dettagli</button>
+            <div class="demo-content py-3">
+                <div class="rotate-container mx-auto">
+                    <div class="card card-front border-info">{{elem["nome"]}}
+                        <div class="card-body">
+                            <p class="card-text"></p>
+                            <button class="btn btn-secondary btn-rotate">Dettagli</button>
+                        </div>
                     </div>
-                </div>
-                <div class="card card-back">
-                    <div class="card-body">
-                        <p class="card-text1"> Gol fatti: {{elem["Gol fatti"]}} <br>
-                            Gol subiti: {{elem["Gol subiti"]}} <br>
-                            Differenza reti: {{elem["Differenza reti"]}}</p>
-                        <button class="btn btn-dark btn-rotate">Go back</button>
+                    <div class="card card-back">
+                        <div class="card-body">
+                            <p class="card-text1"> Gol fatti: {{elem["Gol fatti"]}} <br>
+                                Gol subiti: {{elem["Gol subiti"]}} <br>
+                                Differenza reti: {{elem["Differenza reti"]}}</p>
+                            <button class="btn btn-dark btn-rotate">Go back</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {%endfor%}
 </div>
 </body>
