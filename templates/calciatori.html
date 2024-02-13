@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 
 
     <title>Calciatori</title>
@@ -23,15 +26,9 @@
         footer{
         background-color: #000000e0;
         color: white;
-        min-height: 20px;
-        font-size: 15px;
         border-top: 2px solid blue;
+        text-align: center;
         padding: 10px;
-        position: absolute;
-<!--        bottom: 0;-->
-        left: 0;
-        z-index: 10;
-        width: 100%
         }
 
         .footerLinks{
@@ -46,49 +43,64 @@
         align-items: center;
         }
 
-
-    .bottone_modifica {
+        .bottone_modifica {
         display: none;
-    }
+        }
 
-    .div_comparsa:hover .bottone_modifica {
+        .div_comparsa:hover .bottone_modifica {
         display: inline-block;
-    }
-</style>
+        }
+
+        html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        }
+
+        body {
+        display: flex;
+        flex-direction: column;
+        }
+
+        .content {
+        flex: 1;
+        }
+    </style>
 
 
 </head>
 <body>
 
-   
-<div class="header hd">
-    <div class="container hd1">
-        <img src="static/Img/League2.png" alt="Logo">
-        <div>
-            <h3 style="color: white">CAMPIONATO</h3>
-            <h4 style="color: white">EURO DAITA12</h4>
+<div class="content">
+    <div class="header hd">
+        <div class="container hd1">
+            <img src="static/Img/League2.png" alt="Logo">
+            <div>
+                <h3 style="color: white">CAMPIONATO</h3>
+                <h4 style="color: white">EURO DAITA12</h4>
+            </div>
         </div>
     </div>
-</div>
 
-<nav class="d-flex justify-content-center align-content-center navbar navbar-expand-sm bg-dark border-bottom border-body" data-bs-theme="dark">
-  <div class="container-lg">
-    <img src="static/Img/League2.png" alt="Logo" width="40" height="30">
-    <a class="navbar-brand" href="#">EURO DAITA12</a>
+<nav class="d-flex justify-content-center align-content-center navbar navbar-expand-sm bg-dark border-bottom border-body"
+     data-bs-theme="dark">
+    <div class="container-lg">
+        <img src="static/Img/League2.png" alt="Logo" width="40" height="30">
+        <a class="navbar-brand" href="#">EURO DAITA12</a>
 
-    <div class="collapse navbar-collapse">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/">Home</a>
-        <a class="nav-link" href="/calendario">Calendario</a>
-        <a class="nav-link" href="/classifica">Classifica</a>
-        <a class="nav-link" href="/calciatori">Calciatori</a>
-      </div>
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <a class="nav-link" href="/calendario">Calendario</a>
+                <a class="nav-link" href="/classifica">Classifica</a>
+                <a class="nav-link" href="/calciatori">Calciatori</a>
+            </div>
+        </div>
     </div>
-  </div>
-  </nav>
+</nav>
 
 
-    <div class="d-flex flex-column justify-content-center p-3">
+<div class="d-flex flex-column justify-content-center p-3">
 
     {% for i in range(diz_squadra|length): %}
     {% set j = loop.index %}
@@ -96,7 +108,7 @@
     <h2 class="text-center"> {{ id_nome_squadra[j-1]['nome'] }} </h2>
 
     <table class="table table-fixed table-bordered table-striped">
-    <thead>
+        <thead>
         <tr>
             <th scope="col">Nome</th>
             <th scope="col">Cognome</th>
@@ -105,79 +117,81 @@
             <th scope="col">Numero Maglia</th>
             <th scope="col">Età</th>
         </tr>
-    </thead>
-    <tbody>
-    
-    {% for squadra in range(diz_squadra[j]|length): %} 
-    <tr class="div_comparsa"> 
-        <td class="d-flex justify-content-between">
+        </thead>
+        <tbody>
+
+        {% for squadra in range(diz_squadra[j]|length): %}
+        <tr class="div_comparsa">
+            <td class="d-flex justify-content-between">
         <span class="order-1">
-        <button type="submit" class="bottone_modifica on-hover position-absolute-md position-static btn btn-danger" style="margin-left: -70px;">Cancella</button>
+        <button type="submit" class="bottone_modifica on-hover position-absolute-md position-static btn btn-danger"
+                style="margin-left: -70px;">Cancella</button>
         </span>
-        <span class="order-2">
-        <button type="submit" class="bottone_modifica on-hover position-absolute btn btn-warning" style="margin-left: -90px;">Modifica</button>
+                <span class="order-2">
+        <button type="submit" class="bottone_modifica on-hover position-absolute btn btn-warning"
+                style="margin-left: -90px;">Modifica</button>
         </span>
-        <span>
+                <span>
         {{ diz_squadra[j][loop.index-1]['nome'] }} 
         </span>
-        
-        </td>
-        <td>
-            {{ diz_squadra[j][loop.index-1]['cognome'] }}
-        </td>
-        <td>
-            {{ diz_squadra[j][loop.index-1]['nazionalita'] }}
-        </td>
-        <td>
-            {{ diz_squadra[j][loop.index-1]['ruolo'] }}
-        </td>
-        <td>
-            {{ diz_squadra[j][loop.index-1]['numero_maglia'] }}
-        </td>
-        <td>
-            {{ diz_squadra[j][loop.index-1]['eta'] }}
-        </td>
-    </tr>
-    
-    {% endfor %}
 
-    </tbody>
+            </td>
+            <td>
+                {{ diz_squadra[j][loop.index-1]['cognome'] }}
+            </td>
+            <td>
+                {{ diz_squadra[j][loop.index-1]['nazionalita'] }}
+            </td>
+            <td>
+                {{ diz_squadra[j][loop.index-1]['ruolo'] }}
+            </td>
+            <td>
+                {{ diz_squadra[j][loop.index-1]['numero_maglia'] }}
+            </td>
+            <td>
+                {{ diz_squadra[j][loop.index-1]['eta'] }}
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
     </table>
 
     <div class="d-flex justify-content-center">
         <form method="post" action="">
             <table class="table table-bordered table-striped">
-            <tr>    
-                <td>
-                    <input type="text" name="Nome" placeholder="Nome"> 
-                </td>
-                <td>
-                    <input type="text" name="Cognome" placeholder="Cognome">
-                </td>
-                <td>
-                    <input type="text" name="Nazionalità" placeholder="Nazionalità">
-                </td>
-                <td>
-                    <input type="text" name="Ruolo" placeholder="Ruolo">
-                </td>
-                <td>
-                    <input type="text" name="Numero maglia" placeholder="Numero maglia">
-                </td>
-                <td>
-                    <input type="text" name="Età" placeholder="Età">
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="Nome" placeholder="Nome">
+                    </td>
+                    <td>
+                        <input type="text" name="Cognome" placeholder="Cognome">
+                    </td>
+                    <td>
+                        <input type="text" name="Nazionalità" placeholder="Nazionalità">
+                    </td>
+                    <td>
+                        <input type="text" name="Ruolo" placeholder="Ruolo">
+                    </td>
+                    <td>
+                        <input type="text" name="Numero maglia" placeholder="Numero maglia">
+                    </td>
+                    <td>
+                        <input type="text" name="Età" placeholder="Età">
+                    </td>
+                </tr>
             </table>
-        </div>
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary w-25">Inserisci giocatore</button>
-        </div>    
-        </form>
     </div>
-    <br><br>
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary w-25">Inserisci giocatore</button>
+    </div>
+    </form>
+</div>
+<br><br>
 
-    {% endfor %} 
-    </div>
+{% endfor %}
+</div>
 
 <footer>
     <ul class="footerLinks">
