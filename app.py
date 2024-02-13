@@ -3,6 +3,9 @@ import json
 import mysql.connector
 from funzioni_connessioni import *
 from flask import Flask, jsonify, render_template, request, redirect, url_for
+import funzioni_tabelle as ft
+import inserimento_giocatori as ig
+
 
 app = Flask(__name__)
 
@@ -217,6 +220,14 @@ def inserisci_giocatore():
     
     return redirect(url_for("calciatori", _anchor=request.form.get('j')))
 
+#modificare db_config() per modificare dati db
+#eseguire inserimento giocatori per popolare il db
+try:
+    create_db()
+    ft.create_table()
+    ig.inserimento_giocatori()
+except:
+    pass
 
 if __name__ == '__main__':
     app.run(debug=True)

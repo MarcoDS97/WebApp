@@ -1,12 +1,32 @@
 import mysql.connector
 from mysql.connector import Error
 
+
 db_config = {
     'host': 'localhost',
     'user': 'root',
     'password': '',
-    'database': 'campionato'
+    'database': 'campionato_test'
 }
+
+
+def create_db():
+    localhost_connect = {
+        'host': db_config['host'],
+        'user': db_config['user'],
+        'password': db_config['password']
+    }
+
+    connection = mysql.connector.connect(**localhost_connect)
+    cursor = connection.cursor()
+    
+    query_db = f"CREATE DATABASE IF NOT EXISTS {db_config['database']}"
+
+    cursor.execute(query_db)
+    connection.commit()
+
+    cursor.close()
+    connection.close()
 
 def create_db_connection():
     return mysql.connector.connect(**db_config)
