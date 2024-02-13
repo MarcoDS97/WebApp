@@ -1,7 +1,7 @@
 import json
 import mysql.connector
 from funzioni_connessioni import *
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -161,6 +161,27 @@ def calciatori():
 
     return render_template("calciatori.html", diz_squadra=diz_squadra, numero_squadre=numero_squadre, id_nome_squadra=id_nome_squadra)
 
+
+@app.route("/calciatori/inserisci_giocatore", methods=['POST'])
+def inserisci_giocatore():
+    giocatore = [
+        request.form.get('Nome'),
+        request.form.get('Cognome'),
+        request.form.get('Nazionalità'),
+        request.form.get('j'),
+        request.form.get('Ruolo'),
+        request.form.get('Numero maglia'),
+        request.form.get('Età')
+    ]
+
+    query_inserimento = (
+    "INSERT INTO giocatori (nome, cognome, nazionalita, id_squadra, ruolo, numero_maglia, eta) " 
+    "VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    )
+
+    execute_query_insert(query_inserimento, giocatore)
+    
+    return redirect(url_for("calciatori", _anchor=request.form.get('j')))
 
 if __name__ == '__main__':
     app.run(debug=True)

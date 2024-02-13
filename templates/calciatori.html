@@ -109,16 +109,21 @@
     <tbody>
     
     {% for squadra in range(diz_squadra[j]|length): %} 
-    <tr class="div_comparsa"> 
+    <tr class="div_comparsa">
         <td class="d-flex justify-content-between">
         <span class="order-1">
-        <button type="submit" class="bottone_modifica on-hover position-absolute-md position-static btn btn-danger" style="margin-left: -70px;">Cancella</button>
+        <form method="post">
+        <button type="submit" id="c{{[j]+[loop.index]}}" onclick="modifica()" class="bottone_modifica on-hover position-absolute-md position-static btn btn-danger" style="margin-left: -70px;">Cancella</button>
+        </form>
         </span>
+
         <span class="order-2">
-        <button type="submit" class="bottone_modifica on-hover position-absolute btn btn-warning" style="margin-left: -90px;">Modifica</button>
+        <form method="post">
+        <button type="submit" id="m{{[j]+[loop.index]}}" onclick="cancella()" class="bottone_modifica on-hover position-absolute btn btn-warning" style="margin-left: -90px;">Modifica</button>
+        </form> 
         </span>
         <span>
-        {{ diz_squadra[j][loop.index-1]['nome'] }} 
+        {{ diz_squadra[j][loop.index-1]['nome'] }}
         </span>
         
         </td>
@@ -145,7 +150,7 @@
     </table>
 
     <div class="d-flex justify-content-center">
-        <form method="post" action="">
+        <form method="POST" action="/calciatori/inserisci_giocatore">
             <table class="table table-bordered table-striped">
             <tr>    
                 <td>
@@ -170,14 +175,14 @@
             </table>
         </div>
         <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary w-25">Inserisci giocatore</button>
+            <input type="hidden" value="{{j}}" name="j">
+            <button type="submit" id="{{j}}" class="btn btn-primary w-25">Inserisci giocatore</button>
         </div>    
         </form>
     </div>
     <br><br>
 
     {% endfor %} 
-    </div>
 
 <footer>
     <ul class="footerLinks">
