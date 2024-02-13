@@ -20,15 +20,9 @@
         footer{
         background-color: #000000e0;
         color: white;
-        min-height: 20px;
-        font-size: 15px;
         border-top: 2px solid blue;
+        text-align: center;
         padding: 10px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        z-index: 10;
-        width: 100%
         }
 
         .footerLinks{
@@ -42,19 +36,34 @@
         justify-content: end;
         align-items: center;
         }
+
+        html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        }
+
+        body {
+        display: flex;
+        flex-direction: column;
+        }
+
+        .content {
+        flex: 1;
+        }
     </style>
 </head>
 <body>
-
-<div class="header hd">
-    <div class="container hd1">
-        <img src="static/Img/League2.png" alt="Logo">
-        <div>
-            <h3 style="color: white">CAMPIONATO</h3>
-            <h4 style="color: white">EURO DAITA12</h4>
+<div class="content">
+    <div class="header hd">
+        <div class="container hd1">
+            <img src="static/Img/League2.png" alt="Logo">
+            <div>
+                <h3 style="color: white">CAMPIONATO</h3>
+                <h4 style="color: white">EURO DAITA12</h4>
+            </div>
         </div>
     </div>
-</div>
 
 <nav class="navbar navbar-expand-sm bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-lg">
@@ -73,35 +82,35 @@
 </nav>
 
 
-<section class="sezioneCard">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Posizione</th>
-            <th scope="col">Squadra</th>
-            <th scope="col">V</th>
-            <th scope="col">S</th>
-            <th scope="col">P</th>
-            <th scope="col">Punteggio</th>
-        </tr>
-        </thead>
-        <tbody>
-        {%for elem in classifica%}
+    <section class="sezioneCard">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Posizione</th>
+                <th scope="col">Squadra</th>
+                <th scope="col">V</th>
+                <th scope="col">S</th>
+                <th scope="col">P</th>
+                <th scope="col">Punteggio</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for elem in classifica%}
 
-        <tr>
-            <th scope="row">{{loop.index}}</th>
-            <td>{{elem.nome}}</td>
-            <td>{{elem.v}}</td>
-            <td>{{elem.s}}</td>
-            <td>{{elem.p}}</td>
-            <td>{{elem.punteggio}}</td>
-        </tr>
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{elem.nome}}</td>
+                <td>{{elem.v}}</td>
+                <td>{{elem.s}}</td>
+                <td>{{elem.p}}</td>
+                <td>{{elem.punteggio}}</td>
+            </tr>
 
-        {%endfor%}
-        </tbody>
-    </table>
-</section>
-
+            {%endfor%}
+            </tbody>
+        </table>
+    </section>
+</div>
 <footer>
     <ul class="footerLinks">
         <a href="https://github.com/MarcoDS97/WebApp" style="color: white;">GitHub</a>
