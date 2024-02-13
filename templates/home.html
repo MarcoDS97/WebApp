@@ -96,6 +96,32 @@
         display: flex;
         justify-content: space-evenly
         }
+
+        footer{
+        background-color: #000000e0;
+        color: white;
+        min-height: 20px;
+        font-size: 15px;
+        border-top: 2px solid blue;
+        padding: 10px;
+        position: absolute;
+<!--        bottom: 0;-->
+        left: 0;
+        z-index: 10;
+        width: 100%
+        }
+
+        .footerLinks{
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+        }
+
+        .contenitoreCopyright{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        }
     </style>
 </head>
 <body onload="rotateFu()">
@@ -160,5 +186,18 @@
     </section>
 {%endfor%}
 </div>
+
+<footer>
+    <ul class="footerLinks">
+        <a href="https://github.com/MarcoDS97/WebApp" style="color: white;">GitHub</a>
+        <li>Marco De Sio</li>
+        <li>Davide Lucarelli</li>
+        <li>Alessandro Comi</li>
+        <li>Riccardo Benedetti</li>
+    </ul>
+    <div class="contenitoreCopyright">
+        <p>@copyright 2024</p>
+    </div>
+</footer>
 </body>
 </html>
