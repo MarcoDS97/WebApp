@@ -1,9 +1,14 @@
+
 import json
 import mysql.connector
 from funzioni_connessioni import *
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template, request, redirect, url_for
+
+
+
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def homepage():
@@ -50,7 +55,6 @@ def homepage():
                 elem["Gol subiti"] += elem2["Gol subiti"]
                 elem["Differenza reti"] = elem["Gol fatti"] - elem["Gol subiti"]
 
-    print(gol_1)
     return render_template("home.html", lista_squadre=gol_1)
 
 @app.route("/calendario")
@@ -160,6 +164,33 @@ def calciatori():
     id_nome_squadra = execute_query(query)
 
     return render_template("calciatori.html", diz_squadra=diz_squadra, numero_squadre=numero_squadre, id_nome_squadra=id_nome_squadra)
+
+
+@app.route("/form_ins_sqd", methods=["GET", "POST"])
+def form_ins_sqd():
+    if request.method == "POST":
+        numero_squadre = int(request.form["numero_squadre"])
+        return redirect(url_for("inserisci_nomi_squadre", numero_squadre=numero_squadre))
+    return render_template("form_inserimento_numero_squadre.html")
+
+@app.route("/inserisci_nomi_squadre/<int:numero_squadre>", methods=["GET", "POST"])
+def inserisci_nomi_squadre(numero_squadre):
+    if request.method == "POST":
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+
+        for i in range(numero_squadre):
+            nome_squadra = request.form[f"squadra_{i}"]
+            cursor.execute("INSERT INTO squadra (nome) VALUES (%s)", (nome_squadra,))
+        
+        conn.commit()
+        conn.close()
+
+        return "Dati inseriti correttamente! <a href='/'>Torna alla Home</a>"
+        
+
+    return render_template("form_inserimento_nomi_squadre.html", numero_squadre=numero_squadre)
+
 
 
 if __name__ == '__main__':
