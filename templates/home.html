@@ -168,12 +168,15 @@
     {%for elem in lista_squadre%}
         <section class="sezioneCard">
             <div class="contenitoreArticoli">
-
                 <div class="demo-content py-3">
                     <div class="rotate-container mx-auto">
                         <div class="card card-front border-info">{{elem["nome"]}}
                             <div class="card-body">
-                                <p class="card-text"></p>
+                                {%for immagine in immagini%}
+                                    {%if elem["nome"] in immagine%}
+                                        <p class="card-text" style="background-image: url('{{immagine}}')"></p>
+                                    {%endif%}
+                                {%endfor%}
                                 <button class="btn btn-secondary btn-rotate">Dettagli</button>
                             </div>
                         </div>

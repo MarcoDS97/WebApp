@@ -55,7 +55,13 @@ def homepage():
                 elem["Gol subiti"] += elem2["Gol subiti"]
                 elem["Differenza reti"] = elem["Gol fatti"] - elem["Gol subiti"]
 
-    return render_template("home.html", lista_squadre=gol_1)
+    immagini = ["./static/Img/Atalanta.png", "./static/Img/Bologna.png", "./static/Img/Cagliari.png", "./static/Img/Empoli.png",
+                "./static/Img/Fiorentina.png", "./static/Img/Fiorentina.png", "./static/Img/Frosinone.png", "./static/Img/Genoa.png",
+                "./static/Img/Inter.png", "./static/Img/Juventus.png", "./static/Img/Lazio.png", "./static/Img/Lecce.png",
+                "./static/Img/Milan.png", "./static/Img/Monza.png", "./static/Img/Napoli.png", "./static/Img/Roma.png",
+                "./static/Img/Salernitana.png", "./static/Img/Sassuolo.png", "./static/Img/Torino.png", "./static/Img/Udinese.png",
+                "./static/Img/Verona.png"]
+    return render_template("home.html", lista_squadre=gol_1, immagini=immagini)
 
 @app.route("/calendario")
 def calendario():
