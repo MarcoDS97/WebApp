@@ -45,7 +45,17 @@
         justify-content: end;
         align-items: center;
         }
-    </style>
+
+
+    .bottone_modifica {
+        display: none;
+    }
+
+    .div_comparsa:hover .bottone_modifica {
+        display: inline-block;
+    }
+</style>
+
 
 </head>
 <body>
@@ -85,23 +95,32 @@
 
     <h2 class="text-center"> {{ id_nome_squadra[j-1]['nome'] }} </h2>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-fixed table-bordered table-striped">
     <thead>
         <tr>
-            <th>Nome</th>
-            <th>Cognome</th>
-            <th>Nazionalità</th>
-            <th>Ruolo</th>
-            <th>Numero Maglia</th>
-            <th>Età</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Cognome</th>
+            <th scope="col">Nazionalità</th>
+            <th scope="col">Ruolo</th>
+            <th scope="col">Numero Maglia</th>
+            <th scope="col">Età</th>
         </tr>
     </thead>
     <tbody>
     
     {% for squadra in range(diz_squadra[j]|length): %} 
-    <tr>    
-        <td>
-            {{ diz_squadra[j][loop.index-1]['nome'] }}
+    <tr class="div_comparsa"> 
+        <td class="d-flex justify-content-between">
+        <span class="order-1">
+        <button type="submit" class="bottone_modifica on-hover position-absolute-md position-static btn btn-danger" style="margin-left: -70px;">Cancella</button>
+        </span>
+        <span class="order-2">
+        <button type="submit" class="bottone_modifica on-hover position-absolute btn btn-warning" style="margin-left: -90px;">Modifica</button>
+        </span>
+        <span>
+        {{ diz_squadra[j][loop.index-1]['nome'] }} 
+        </span>
+        
         </td>
         <td>
             {{ diz_squadra[j][loop.index-1]['cognome'] }}
@@ -130,24 +149,24 @@
             <table class="table table-bordered table-striped">
             <tr>    
                 <td>
-                    <input type="text" name="Nome" placeholder="Nome">
+                    <input type="text" name="Nome" placeholder="Nome"> 
                 </td>
                 <td>
-                    <input type="text" name="Nome" placeholder="Cognome">
+                    <input type="text" name="Cognome" placeholder="Cognome">
                 </td>
                 <td>
-                    <input type="text" name="Nome" placeholder="Nazionalità">
+                    <input type="text" name="Nazionalità" placeholder="Nazionalità">
                 </td>
                 <td>
-                    <input type="text" name="Nome" placeholder="Ruolo">
+                    <input type="text" name="Ruolo" placeholder="Ruolo">
                 </td>
                 <td>
-                    <input type="text" name="Nome" placeholder="Numero maglia">
+                    <input type="text" name="Numero maglia" placeholder="Numero maglia">
                 </td>
                 <td>
-                    <input type="text" name="Nome" placeholder="Età">
+                    <input type="text" name="Età" placeholder="Età">
                 </td>
-            </tr> 
+            </tr>
             </table>
         </div>
         <div class="d-flex justify-content-center">
