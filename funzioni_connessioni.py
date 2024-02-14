@@ -20,7 +20,7 @@ def create_db():
     connection = mysql.connector.connect(**localhost_connect)
     cursor = connection.cursor()
     
-    query_db = f"CREATE DATABASE IF NOT EXISTS {db_config['database']}"
+    query_db = f"CREATE DATABASE {db_config['database']}"
 
     cursor.execute(query_db)
     connection.commit()

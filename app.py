@@ -56,7 +56,7 @@ def homepage():
                 elem["Differenza reti"] = elem["Gol fatti"] - elem["Gol subiti"]
 
     immagini = ["./static/Img/Atalanta.png", "./static/Img/Bologna.png", "./static/Img/Cagliari.png", "./static/Img/Empoli.png",
-                "./static/Img/Fiorentina.png", "./static/Img/Fiorentina.png", "./static/Img/Frosinone.png", "./static/Img/Genoa.png",
+                "./static/Img/Fiorentina.png", "./static/Img/Frosinone.png", "./static/Img/Genoa.png",
                 "./static/Img/Inter.png", "./static/Img/Juventus.png", "./static/Img/Lazio.png", "./static/Img/Lecce.png",
                 "./static/Img/Milan.png", "./static/Img/Monza.png", "./static/Img/Napoli.png", "./static/Img/Roma.png",
                 "./static/Img/Salernitana.png", "./static/Img/Sassuolo.png", "./static/Img/Torino.png", "./static/Img/Udinese.png",
@@ -219,6 +219,69 @@ def inserisci_giocatore():
     execute_query_insert(query_inserimento, giocatore)
     
     return redirect(url_for("calciatori", _anchor=request.form.get('j')))
+
+
+@app.route("/calciatori/elimina_giocatore", methods=['POST'])
+def elimina_giocatore():
+  
+    indici_button_elim = request.form.get('button_elim')
+    indici_button_elim = indici_button_elim.strip("[]").split(",")
+    
+    query = """
+        SELECT *
+        FROM giocatori
+        WHERE id_squadra = %s;
+    """
+    
+    diz_giocatori = {}
+    diz_giocatori = execute_query(query, (indici_button_elim[0],))
+
+    print(diz_giocatori)
+
+    query_elim = "DELETE FROM giocatori WHERE id_giocatore = %s;"
+    execute_query_insert(query_elim, ((diz_giocatori[(int(indici_button_elim[1])-1)]['id_giocatore']),))
+
+    return redirect(url_for("calciatori", _anchor=indici_button_elim[0]))
+
+
+
+# @app.route("/calciatori/modifica_giocatore", methods=['POST'])
+# def modifica_giocatore():
+  
+#     indici_button_mod = request.form.get('button_mod')
+#     indici_button_mod = indici_button_mod.strip("[]").split(",")
+    
+#     query = """
+#         SELECT *
+#         FROM giocatori
+#         WHERE id_squadra = %s;
+#     """
+    
+#     diz_giocatori = {}
+#     diz_giocatori = execute_query(query, (indici_button_mod[0],))
+
+#     # giocatore = [
+#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['nome'],
+#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['cognome'],
+#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['nazionalita'],
+#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['ruolo'],
+#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['numero_maglia'],
+#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['eta'],
+#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['id_squadra'],
+#     # ]
+#     #
+#     # return render_template("calciatori#1",
+#     #                        nome=giocatore[0], 
+#     #                        cognome=giocatore[1], 
+#     #                        nazionalita=giocatore[2], 
+#     #                        ruolo=giocatore[3], 
+#     #                        numero_maglia=giocatore[4],
+#     #                        eta=giocatore[5],
+#     #                        id_squadra=giocatore[6]
+#     # )
+
+#    return redirect(url_for("calciatori", _anchor=indici_button_mod[0]))
+
 
 #modificare db_config() per modificare dati db
 #eseguire inserimento giocatori per popolare il db
