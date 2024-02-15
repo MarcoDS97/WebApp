@@ -94,9 +94,9 @@
 <script>
 
     
-function toggle_modifica() {
-            const div_modifica = document.getElementsByClass('div_modifica');
-            const div_aggiunta = document.getElementsByClass('div_aggiunta');
+function toggle_modifica(j) {
+            const div_modifica = document.getElementsByClassName('div_modifica')[j];
+            const div_aggiunta = document.getElementsByClassName('div_aggiunta')[j];
 
             if (div_modifica.style.display === 'none') {
                 div_modifica.style.display = 'block';
@@ -107,7 +107,7 @@ function toggle_modifica() {
             }
         }
 
-    document.getElementsByClass('bottone-modifica').addEventListener('click', toggle_modifica());
+    // document.getElementsByClassName('button-mod')[1].addEventListener('click', toggle_modifica());
 
 </script>
 
@@ -146,6 +146,7 @@ function toggle_modifica() {
 
     {% for i in range(diz_squadra|length): %}
     {% set j = loop.index %}
+
 
     <div class="d-flex justify-content-start my-2">
     <span class="dropdown position-absolute px-5">
@@ -192,7 +193,7 @@ function toggle_modifica() {
 
         <span class="order-2">
             <!-- <form method="POST" action="/calciatori/modifica_giocatore"> -->
-                <button type="button" id="{{[j]+[loop.index]}}" name="button_mod" onclick="toggle_modifica()" class="bottone_modifica on-hover position-absolute btn btn-warning" style="margin-left: -90px;">Modifica</button>
+                <button type="button" id="{{[j]+[loop.index]}}" name="button_mod" onclick="toggle_modifica({{j-1}})" class="bottone_modifica on-hover position-absolute btn btn-warning" style="margin-left: -90px;">Modifica</button>
         <!-- </form>  -->
         </span>
         <span>
@@ -249,12 +250,11 @@ function toggle_modifica() {
             </table>
         <div class="d-flex justify-content-center">
             <input type="hidden" value="{{j}}" name="j">
-            <button type="submit" onclick="toggle_modifica()" class="btn btn-warning px-5">Modifica giocatore</button>
+            <button type="submit" onclick="toggle_modifica({{j}})" class="btn btn-warning px-5">Modifica giocatore</button>
         </div>    
         </form>
     </div>
     </div>
-    <br><br>
 
     <div class="div_aggiunta">
         <div class="d-flex justify-content-center">
@@ -289,6 +289,11 @@ function toggle_modifica() {
     </div>
     </div> 
     <br><br>
+
+<!--     
+    <script>
+        document.getElementsByClassName('button-mod')[{{j}}].addEventListener('click', toggle_modifica());
+    </script> -->
 
 
     {% endfor %} 
