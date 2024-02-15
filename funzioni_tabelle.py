@@ -1,35 +1,56 @@
 from funzioni_connessioni import *
 
 def create_table():
-    query_squadra_risultati = """
-    CREATE TABLE IF NOT EXISTS squadra_risultati(
-    id_squadra INT(11) PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(255) UNIQUE,
-    vittorie INT(11),
-    sconfitte INT(11),
-    pareggi INT(11),
-    punteggio INT(11)
-    );
-    """
-    execute_query(query_squadra_risultati)
+    query_squadra = """
+        CREATE TABLE IF NOT EXISTS squadra(
+        id_squadra INT PRIMARY KEY AUTO_INCREMENT,
+        nome VARCHAR(255) UNIQUE
+        );
+        """
+    execute_query_insert(query_squadra)
+    
+    query_risultati = """
+        CREATE TABLE IF NOT EXISTS risultati(
+        id_risultato INT PRIMARY KEY AUTO_INCREMENT,
+        gs1 INT,
+        gs2 INT,
+        giornata INT,
+        id_s1 INT,
+        id_s2 INT
+        );
+        """
+    execute_query_insert(query_risultati)
 
     query_giocatori = """
-    CREATE TABLE IF NOT EXISTS giocatori(
-    id_giocatore INT(11) PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(255),
-    cognome VARCHAR(255),
-    eta INT(11),
-    nazionalita VARCHAR(255),
-    ruolo VARCHAR(255),
-    numero_maglia INT(11),
-    id_squadra INT(11)
-    );
-    """
-    execute_query(query_giocatori)
+        CREATE TABLE IF NOT EXISTS giocatori(
+        id_giocatore INT PRIMARY KEY AUTO_INCREMENT,
+        nome VARCHAR(255),
+        cognome VARCHAR(255),
+        nazionalita VARCHAR(255),
+        ruolo VARCHAR(255),
+        numero_maglia INT,
+        eta INT,
+        id_squadra INT
+        );
+        """
+    execute_query_insert(query_giocatori)
 
-    fk_giocatori = """
-    ALTER TABLE giocatori
-    ADD CONSTRAINT fk_squadra FOREIGN KEY (id_squadra) REFERENCES squadra_risultati(id_squadra)
-    """
-    execute_query(fk_giocatori)
+    try:
+        fk_giocatori = """
+            ALTER TABLE giocatori
+            ADD CONSTRAINT fk_squadra FOREIGN KEY (id_squadra) REFERENCES squadra(id_squadra);
+            """
+        execute_query_insert(fk_giocatori)
+    except:
+        pass
+
+    try:
+        fk_risultati = """
+            ALTER TABLE risultati
+            ADD CONSTRAINT fk_id_s1 FOREIGN KEY (id_s1) REFERENCES squadra(id_squadra)
+            ADD CONSTRAINT fk_id_s2 FOREIGN KEY (id_s2) REFERENCES squadra(id_squadra);
+            """
+        execute_query_insert(fk_giocatori)
+    except:
+        pass
 

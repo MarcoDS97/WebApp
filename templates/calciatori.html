@@ -60,6 +60,14 @@
         display: inline-block;
         }
 
+        .div_modifica {
+            display: none;
+        }
+
+        .div_aggiunta {
+            display: block;
+        }
+
         html, body {
         height: 100%;
         margin: 0;
@@ -74,11 +82,35 @@
         .content {
         flex: 1;
         }
+
+
+        
     </style>
 
 
 </head>
 <body>
+
+<script>
+
+    
+function toggle_modifica(j) {
+            const div_modifica = document.getElementsByClassName('div_modifica')[j];
+            const div_aggiunta = document.getElementsByClassName('div_aggiunta')[j];
+
+            if (div_modifica.style.display === 'none') {
+                div_modifica.style.display = 'block';
+                div_aggiunta.style.display = 'none';
+            } else {
+                div_modifica.style.display = 'none';
+                div_aggiunta.style.display = 'block';
+            }
+        }
+
+    // document.getElementsByClassName('button-mod')[1].addEventListener('click', toggle_modifica());
+
+</script>
+
 
 <div class="content">
     <div class="header hd">
@@ -108,40 +140,64 @@
     </div>
 </nav>
 
+</div>
 
-<div class="d-flex flex-column justify-content-center p-3">
+<div class="d-flex flex-column justify-content-center">
 
     {% for i in range(diz_squadra|length): %}
     {% set j = loop.index %}
 
-    <h2 class="text-center"> {{ id_nome_squadra[j-1]['nome'] }} </h2>
 
-    <table class="table table-fixed table-bordered table-striped">
+    <div class="d-flex justify-content-start my-2">
+    <span class="dropdown position-absolute px-5">
+        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Vai a squadra
+        </button>
+        <ul class="dropdown-menu">
+        
+        {% for i in range(diz_squadra|length): %}
+            <li><a class="dropdown-item" href="#{{i+1}}">{{ id_nome_squadra[i]['nome'] }}</a></li>
+        {% endfor %}
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/calciatori">Inzio Pagina</a></li>
+        </ul>
+        </span>
+        
+        <span class="col-12">
+        <h2 class="text-center" id="{{j}}"> {{ id_nome_squadra[j-1]['nome'] }} </h2>
+    </span>
+    </div>
+
+    <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Cognome</th>
+            <th scope="col" class="col-3 col-md">Nome</th>
+            <th scope="col" class="col-3 col-md">Cognome</th>
             <th scope="col">Nazionalità</th>
             <th scope="col">Ruolo</th>
             <th scope="col">Numero Maglia</th>
             <th scope="col">Età</th>
         </tr>
-        </thead>
+    </thead>
+
         <tbody>
 
         {% for squadra in range(diz_squadra[j]|length): %}
-        <tr class="div_comparsa">
+        <tr class="div_comparsa align-middle">
             <td class="d-flex justify-content-between">
         <span class="order-1">
-        <button type="submit" class="bottone_modifica on-hover position-absolute-md position-static btn btn-danger"
-                style="margin-left: -70px;">Cancella</button>
+        <form method="POST" action="/calciatori/elimina_giocatore">
+        <button type="submit" value="{{[j]+[loop.index]}}" name = "button_elim"  class="bottone_modifica on-hover position-absolute-md position-static btn btn-danger" style="margin-left: -70px;">Cancella</button>
+        </form>
         </span>
-                <span class="order-2">
-        <button type="submit" class="bottone_modifica on-hover position-absolute btn btn-warning"
-                style="margin-left: -90px;">Modifica</button>
+
+        <span class="order-2">
+            <!-- <form method="POST" action="/calciatori/modifica_giocatore"> -->
+                <button type="button" id="{{[j]+[loop.index]}}" name="button_mod" onclick="toggle_modifica({{j-1}})" class="bottone_modifica on-hover position-absolute btn btn-warning" style="margin-left: -90px;">Modifica</button>
+        <!-- </form>  -->
         </span>
-                <span>
-        {{ diz_squadra[j][loop.index-1]['nome'] }} 
+        <span>
+        {{ diz_squadra[j][loop.index-1]['nome'] }}
         </span>
 
             </td>
@@ -167,8 +223,42 @@
         </tbody>
     </table>
 
-    <div class="d-flex justify-content-center">
-        <form method="post" action="">
+    <div class="div_modifica">
+        <div class="d-flex justify-content-center">
+        <form method="POST" action="/calciatori/esegui_modifica">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>
+                        <input type="text" name="Nome" placeholder="Nome" value="{{nome}}">
+                    </td>
+                    <td>
+                        <input type="text" name="Cognome" placeholder="Cognome" value="{{cognome}}">
+                    </td>
+                    <td>
+                        <input type="text" name="Nazionalità" placeholder="Nazionalità">
+                    </td>
+                    <td>
+                        <input type="text" name="Ruolo" placeholder="Ruolo">
+                    </td>
+                    <td>
+                        <input type="text" name="Numero maglia" placeholder="Numero maglia">
+                    </td>
+                    <td>
+                        <input type="text" name="Età" placeholder="Età">
+                    </td>
+                </tr>
+            </table>
+        <div class="d-flex justify-content-center">
+            <input type="hidden" value="{{j}}" name="j">
+            <button type="submit" onclick="toggle_modifica({{j}})" class="btn btn-warning px-5">Modifica giocatore</button>
+        </div>    
+        </form>
+    </div>
+    </div>
+
+    <div class="div_aggiunta">
+        <div class="d-flex justify-content-center">
+        <form method="POST" action="/calciatori/inserisci_giocatore">
             <table class="table table-bordered table-striped">
                 <tr>
                     <td>
@@ -191,16 +281,22 @@
                     </td>
                 </tr>
             </table>
+        <div class="d-flex justify-content-center">
+            <input type="hidden" value="{{j}}" name="j">
+            <button type="submit" class="btn btn-primary px-5">Inserisci giocatore</button>
+        </div>    
+        </form>
     </div>
-    <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary w-25">Inserisci giocatore</button>
-    </div>
-    </form>
-</div>
-<br><br>
+    </div> 
+    <br><br>
 
-{% endfor %}
-</div>
+<!--     
+    <script>
+        document.getElementsByClassName('button-mod')[{{j}}].addEventListener('click', toggle_modifica());
+    </script> -->
+
+
+    {% endfor %} 
 
 <div style="background-color: Black; border-top: 2px solid blue;">
     <footer>

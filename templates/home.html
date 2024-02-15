@@ -69,7 +69,7 @@
 
         /* Demo style only */
         .demo-content {
-        margin-bottom: 70px;
+        margin-bottom: 0px;
         text-align: center;
         }
 
@@ -89,7 +89,7 @@
         background-position: center;
         background-size: cover;
         width: 250px;
-        height: 250px;
+        height: 276px;
         }
 
         .contCard{
@@ -171,9 +171,11 @@
   </nav>
 
 <!--<button class="btn btn-secondary btn-rotate">Crea DB</button>-->
-<a href="/form_ins_sqd" class="btn btn-secondary">Aggiungi squadre</a>
+<div class="d-flex justify-content-center m-2 my-2">
+<a href="/form_ins_sqd" class="btn btn-lg btn-secondary mt-3">Aggiungi squadre</a>
+</div>
 
-    <div class="contCard">
+    <div class="contCard d-flex flex-wrap">
     {%for elem in lista_squadre%}
         <section class="sezioneCard">
             <div class="contenitoreArticoli">
