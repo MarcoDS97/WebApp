@@ -245,42 +245,45 @@ def elimina_giocatore():
 
 
 
-# @app.route("/calciatori/modifica_giocatore", methods=['POST'])
-# def modifica_giocatore():
+@app.route("/calciatori/modifica_giocatore", methods=['POST'])
+def modifica_giocatore():
   
-#     indici_button_mod = request.form.get('button_mod')
-#     indici_button_mod = indici_button_mod.strip("[]").split(",")
+    indici_button_mod = request.form.get('button_mod')
+    indici_button_mod = indici_button_mod.strip("[]").split(",")
     
-#     query = """
-#         SELECT *
-#         FROM giocatori
-#         WHERE id_squadra = %s;
-#     """
+    query = """
+        SELECT *
+        FROM giocatori
+        WHERE id_squadra = %s;
+    """
     
-#     diz_giocatori = {}
-#     diz_giocatori = execute_query(query, (indici_button_mod[0],))
+    diz_giocatori = {}
+    diz_giocatori = execute_query(query, (indici_button_mod[0],))
 
-#     # giocatore = [
-#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['nome'],
-#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['cognome'],
-#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['nazionalita'],
-#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['ruolo'],
-#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['numero_maglia'],
-#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['eta'],
-#     #     diz_giocatori[(int(indici_button_mod[1])-1)]['id_squadra'],
-#     # ]
-#     #
-#     # return render_template("calciatori#1",
-#     #                        nome=giocatore[0], 
-#     #                        cognome=giocatore[1], 
-#     #                        nazionalita=giocatore[2], 
-#     #                        ruolo=giocatore[3], 
-#     #                        numero_maglia=giocatore[4],
-#     #                        eta=giocatore[5],
-#     #                        id_squadra=giocatore[6]
-#     # )
+    giocatore = [
+        diz_giocatori[(int(indici_button_mod[1])-1)]['nome'],
+        diz_giocatori[(int(indici_button_mod[1])-1)]['cognome'],
+        diz_giocatori[(int(indici_button_mod[1])-1)]['nazionalita'],
+        diz_giocatori[(int(indici_button_mod[1])-1)]['ruolo'],
+        diz_giocatori[(int(indici_button_mod[1])-1)]['numero_maglia'],
+        diz_giocatori[(int(indici_button_mod[1])-1)]['eta'],
+        diz_giocatori[(int(indici_button_mod[1])-1)]['id_squadra'],
+    ]
+    
+    return render_template("calciatori#1",
+                           nome=giocatore[0], 
+                           cognome=giocatore[1], 
+                           nazionalita=giocatore[2], 
+                           ruolo=giocatore[3], 
+                           numero_maglia=giocatore[4],
+                           eta=giocatore[5],
+                           id_squadra=giocatore[6]
+    )
 
-#    return redirect(url_for("calciatori", _anchor=indici_button_mod[0]))
+@app.route("/calciatori/esegui_modifica", methods=['POST'])
+def esegui_modifica():
+
+    pass
 
 
 #modificare db_config() per modificare dati db
