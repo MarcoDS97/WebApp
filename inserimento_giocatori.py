@@ -10,10 +10,8 @@ def inserimento_giocatori():
         next(lettore)
         for riga in lettore:
             set_squadre.add(riga[3])
-    print(set_squadre)
     lista_squad = list(set_squadre)
     lista_squad = sorted(lista_squad)
-    print(lista_squad)
     diz_squadre = {}
     count= 1
     for elem in lista_squad:

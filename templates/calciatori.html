@@ -98,16 +98,24 @@ function toggle_modifica(j) {
             const div_modifica = document.getElementsByClassName('div_modifica')[j];
             const div_aggiunta = document.getElementsByClassName('div_aggiunta')[j];
 
-            if (div_modifica.style.display === 'none') {
-                div_modifica.style.display = 'block';
+            if (div_aggiunta.style.display == 'block') {
                 div_aggiunta.style.display = 'none';
+                div_modifica.style.display = 'none'; //assicuro wake up
+                div_modifica.style.display = 'block';
             } else {
                 div_modifica.style.display = 'none';
                 div_aggiunta.style.display = 'block';
+                
             }
-        }
-
-    // document.getElementsByClassName('button-mod')[1].addEventListener('click', toggle_modifica());
+}
+        //     if (div_modifica.style.display === 'none') {
+        //         div_modifica.style.display = 'block';
+        //         div_aggiunta.style.display= 'none';
+        //     } else {
+        //         div_modifica.style.display = 'none';
+        //         div_aggiunta.style.display = 'block';
+        //     }
+        // }
 
 </script>
 
@@ -193,8 +201,12 @@ function toggle_modifica(j) {
 
         <span class="order-2">
             <!-- <form method="POST" action="/calciatori/modifica_giocatore"> -->
-                <button type="button" id="{{[j]+[loop.index]}}" name="button_mod" onclick="toggle_modifica({{j-1}})" class="bottone_modifica on-hover position-absolute btn btn-warning" style="margin-left: -90px;">Modifica</button>
-        <!-- </form>  -->
+                
+                <button type="button" id="{{[j]+[loop.index]}}" name="button_mod" class="bottone_modifica on-hover position-absolute btn btn-warning" style="margin-left: -90px;">Modifica</button> <!-- onclick="toggle_modifica({{j-1}})"-->
+                <script>
+                document.getElementById('{{[j]+[loop.index]}}').addEventListener('click', function() {toggle_modifica({{j-1}});}); 
+                </script>    
+            <!-- </form>  -->
         </span>
         <span>
         {{ diz_squadra[j][loop.index-1]['nome'] }}
@@ -250,7 +262,7 @@ function toggle_modifica(j) {
             </table>
         <div class="d-flex justify-content-center">
             <input type="hidden" value="{{j}}" name="j">
-            <button type="submit" onclick="toggle_modifica({{j}})" class="btn btn-warning px-5">Modifica giocatore</button>
+            <button type="submit"  class="btn btn-warning px-5">Modifica giocatore</button> <!-- onclick="toggle_modifica({{j}})" -->
         </div>    
         </form>
     </div>
